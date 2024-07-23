@@ -53,6 +53,7 @@ public class AuthController {
         this.jwtGenerator = jwtGenerator;
     }
 
+    @Operation(summary = "Login user", security = @SecurityRequirement(name = "bearerAuth"))
     @PostMapping("login")
     public ResponseEntity<AuthResponseDto> login(@RequestBody LoginDto loginDto){
         Authentication authentication = authenticationManager.authenticate(
@@ -64,6 +65,7 @@ public class AuthController {
         return new ResponseEntity<>(new AuthResponseDto(token), HttpStatus.OK);
     }
 
+    @Operation(summary = "Register a new user", security = @SecurityRequirement(name = "bearerAuth"))
     @PostMapping("register")
     public ResponseEntity<String> register(@RequestBody RegisterDto registerDto) {
         if(userService.existsByUsername(registerDto.getUsername())){
@@ -83,7 +85,7 @@ public class AuthController {
     }
 
 
-    @Operation(summary = "My endpoint", security = @SecurityRequirement(name = "bearerAuth"))
+    @Operation(summary = "Retrieve user roles", security = @SecurityRequirement(name = "bearerAuth"))
     @GetMapping("/roles")
     public ResponseEntity<List<String>> getUserRoles(@RequestParam String username) {
         UserEntity user = customUserDetailsService.findByUsername(username);
@@ -98,6 +100,7 @@ public class AuthController {
         return new ResponseEntity<>(roles, HttpStatus.OK);
     }
 
+    @Operation(summary = "Delete user by ID", security = @SecurityRequirement(name = "bearerAuth"))
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable int id){
         if(!userService.existsById(id)){
