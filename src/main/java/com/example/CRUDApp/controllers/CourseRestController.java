@@ -7,6 +7,7 @@ import com.example.CRUDApp.services.CourseService;
 import com.example.CRUDApp.entities.Course;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/CRUDApp")
+@Tag(name = "Course Controller", description = "Endpoints for managing courses")
 public class CourseRestController {
 
     @Autowired
