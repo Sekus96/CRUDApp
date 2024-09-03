@@ -34,54 +34,30 @@ public class CourseRestController {
     @Operation(summary = "My endpoint", security = @SecurityRequirement(name = "bearerAuth"))
     @GetMapping("/secure")
     public ResponseEntity<List<Course>> getAllCourses(){
-        List<Course> allCourses = courseService.getAllCoursees();
-        return new ResponseEntity<>(allCourses, HttpStatus.OK);
+        return ResponseEntity.ok(courseService.getAllCourses());
     }
 
     @Operation(summary = "My endpoint", security = @SecurityRequirement(name = "bearerAuth"))
     @GetMapping("/secure/{id}")
-    public ResponseEntity<Course> getCourse(@PathVariable Integer id){
-        Course course = courseService.getById(id);
-        if(courseService!=null){
-            return new ResponseEntity<>(course, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<Course> getCourse(@PathVariable Integer id) {
+        return courseService.getCourseById(id);
     }
 
     @Operation(summary = "My endpoint", security = @SecurityRequirement(name = "bearerAuth"))
     @PostMapping("/post")
-    public ResponseEntity<String> addCourse(@RequestBody Course course){
-        courseService.addCourse(course);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<String> addCourse(@RequestBody Course course) {
+        return courseService.addCourse(course);
     }
 
     @Operation(summary = "My endpoint", security = @SecurityRequirement(name = "bearerAuth"))
     @PutMapping("/put/{id}")
-    public ResponseEntity<String> updateCourse(@RequestBody Course courseBody, @PathVariable Integer id){
-//        courseService.updateCourse(courseBody, id);
-        Course existingCourse = courseService.findById(id);
-
-        if (existingCourse == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        existingCourse.setName(courseBody.getName());
-        existingCourse.setPrice(courseBody.getPrice());
-
-        courseService.save(existingCourse);
-
-        return ResponseEntity.ok("Zasób o ID " + id + " został zaktualizowany");
+    public ResponseEntity<String> updateCourse(@RequestBody Course courseBody, @PathVariable Integer id) {
+        return courseService.updateCourse(courseBody, id);
     }
 
     @Operation(summary = "My endpoint", security = @SecurityRequirement(name = "bearerAuth"))
     @DeleteMapping("/detele/{id}")
-    public ResponseEntity<String> deleteCourse(@PathVariable Integer id){
-        if(!courseService.existsById(id)){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            courseService.deleteById(id);
-            return ResponseEntity.ok("Course with ID " + id + " deleted successfully");
-        }
+    public ResponseEntity<String> deleteCourse(@PathVariable Integer id) {
+        return courseService.deleteCourse(id);
     }
 }

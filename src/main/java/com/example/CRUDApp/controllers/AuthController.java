@@ -57,59 +57,26 @@ public class AuthController {
 
     @Operation(summary = "Login user", security = @SecurityRequirement(name = "bearerAuth"))
     @PostMapping("login")
-    public ResponseEntity<AuthResponseDto> login(@RequestBody LoginDto loginDto){
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginDto.getUsername(),
-                        loginDto.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String token = jwtGenerator.generateToken(authentication);
-        return new ResponseEntity<>(new AuthResponseDto(token), HttpStatus.OK);
+    public ResponseEntity<AuthResponseDto> login(@RequestBody LoginDto loginDto) {
+        return userService.login(loginDto);
     }
 
     @Operation(summary = "Register a new user", security = @SecurityRequirement(name = "bearerAuth"))
     @PostMapping("register")
     public ResponseEntity<String> register(@RequestBody RegisterDto registerDto) {
-        if(userService.existsByUsername(registerDto.getUsername())){
-            return new ResponseEntity<>("Username is taken!", HttpStatus.BAD_REQUEST);
-        }
-
-        UserEntity user = new UserEntity();
-        user.setUsername(registerDto.getUsername());
-        user.setPassword(passwordEncoder.encode(registerDto.getPassword()));
-
-        Role roles = roleRepository.findByName("USER").orElseThrow(() -> new NoSuchElementException("Role 'USER' not found"));
-        user.setRoles(Collections.singletonList(roles));
-
-        userService.save(user);
-
-        return new ResponseEntity<>("User registered success!", HttpStatus.OK);
+        return userService.register(registerDto);
     }
 
 
     @Operation(summary = "Retrieve user roles", security = @SecurityRequirement(name = "bearerAuth"))
     @GetMapping("/roles")
     public ResponseEntity<List<String>> getUserRoles(@RequestParam String username) {
-        UserEntity user = customUserDetailsService.findByUsername(username);
-        if (user == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-        List<String> roles = user.getRoles().stream()
-                .map(Role::getName)
-                .collect(Collectors.toList());
-        System.out.println(user.getRoles());
-        return new ResponseEntity<>(roles, HttpStatus.OK);
+        return userService.getUserRoles(username);
     }
 
     @Operation(summary = "Delete user by ID", security = @SecurityRequirement(name = "bearerAuth"))
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteUser(@PathVariable int id){
-        if(!userService.existsById(id)){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            userService.deleteUserById(id);
-            return ResponseEntity.ok("User with ID " + id + " has been deleted successfully");
-        }
+    public ResponseEntity<String> deleteUser(@PathVariable int id) {
+        return userService.deleteUser(id);
     }
 }

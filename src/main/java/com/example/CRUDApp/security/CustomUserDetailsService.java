@@ -5,6 +5,7 @@ import com.example.CRUDApp.entities.UserEntity;
 import com.example.CRUDApp.repositories.UserRepository;
 import com.example.CRUDApp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -21,12 +22,14 @@ import java.util.stream.Collectors;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final UserService userService;
-
     @Autowired
-    public CustomUserDetailsService(UserService userService) {
-        this.userService = userService;
-    }
+    @Lazy
+    private UserService userService;
+
+//    @Autowired
+//    public CustomUserDetailsService(UserService userService) {
+//        this.userService = userService;
+//    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

@@ -5,6 +5,8 @@ import com.example.CRUDApp.repositories.CourseRepository;
 import com.example.CRUDApp.entities.Course;
 import com.example.CRUDApp.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,16 +31,15 @@ public class CoursServiceImpl implements CourseService {
     }
 
     @Override
-    public String addCourse(Course course) {
+    public ResponseEntity<String> addCourse(Course course) {
         Optional<Course> findById = courseRepo.findById(course.getId());
-        if(findById.isPresent()) {
-            return "fail";
+        if (findById.isPresent()) {
+            return new ResponseEntity<>("Course already exists", HttpStatus.CONFLICT);
         } else {
             courseRepo.save(course);
+            return new ResponseEntity<>("Course created successfully", HttpStatus.CREATED);
         }
-        return null;
     }
-
     @Override
     public void save(Course updatedCourse) {
         courseRepo.save(updatedCourse);
@@ -58,7 +59,7 @@ public class CoursServiceImpl implements CourseService {
     }
 
     @Override
-    public List<Course> getAllCoursees() {
+    public List<Course> getAllCourses() {
         return courseRepo.findAll();
     }
 
@@ -68,44 +69,54 @@ public class CoursServiceImpl implements CourseService {
     }
 
     @Override
-    public void updateCourse(Course course, Integer id) {
-        Course courseFound = null;
-        List<Course> courses=courseRepo.findById(getById(id));
-        if(courses!=null){
-            for(Course course1:courses){
-                if(course1.getName().equals(course.getName()) && course1.getPrice() == (course.getPrice())){
-                    courseFound = course1;
-                }
-            }
-        }
-        if(courseFound==null){
-            courseFound = new Course();
-            courseFound.setName(course.getName());
-            courseFound.setPrice(course.getPrice());
-            courseRepo.save(courseFound);
+    public ResponseEntity<String> updateCourse(Course course, Integer id) {
+        Optional<Course> existingCourseOptional = courseRepo.findById(id);
+
+        if (existingCourseOptional.isPresent()) {
+            Course existingCourse = existingCourseOptional.get();
+            existingCourse.setName(course.getName());
+            existingCourse.setPrice(course.getPrice());
+            courseRepo.save(existingCourse);
+            return ResponseEntity.ok("Kurs o ID " + id + " został zaktualizowany pomyślnie.");
+        } else {
+            return ResponseEntity.status(404).body("Kurs o ID " + id + " nie został znaleziony.");
         }
     }
 
     @Override
-    public boolean deleteById(Integer id) {
-//        Optional<Course> findById = courseRepo.findById(id);
-//
-//        if(findById.isPresent()){
-//            courseRepo.deleteById(id);
-//        }
-//        return null;
-
-        boolean isRemoved = false;
-
-        if(courseRepo.existsById(id)){
+    public ResponseEntity<String> deleteCourse(Integer id) {
+        if (!courseRepo.existsById(id)) {
+            return ResponseEntity.status(404).body("Course with ID " + id + " not found.");
+        } else {
             courseRepo.deleteById(id);
-            isRemoved = true;
+            return ResponseEntity.ok("Course with ID " + id + " deleted successfully.");
         }
-        return isRemoved;
     }
+
+//    @Override
+//    public boolean deleteById(Integer id) {
+//
+//        boolean isRemoved = false;
+//
+//        if(courseRepo.existsById(id)){
+//            courseRepo.deleteById(id);
+//            isRemoved = true;
+//        }
+//        return isRemoved;
+//    }
 
     @Override
     public boolean existsById(Integer id) {
         return courseRepo.existsById(id);
+    }
+
+    @Override
+    public ResponseEntity<Course> getCourseById(Integer id) {
+        Course course = getById(id);
+        if (course != null) {
+            return new ResponseEntity<>(course, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }
