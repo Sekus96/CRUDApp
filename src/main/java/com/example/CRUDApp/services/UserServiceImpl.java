@@ -19,6 +19,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Collections;
@@ -96,6 +98,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseEntity<List<String>> getUserRoles(String username) {
+
         UserEntity user = findByUsername(username);
         if (user == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -109,8 +112,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public UserEntity findByUsername(String username) {
-        return userRepository.findByUsername(username).orElse(null);
+        return userRepository.findByUsernameWithRoles(username)
+                .orElseThrow(() -> new NoSuchElementException("User not found with username: " + username));
     }
 
     @Override

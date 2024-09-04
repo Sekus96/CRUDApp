@@ -1,10 +1,12 @@
 package com.example.CRUDApp.security;
 
+import com.example.CRUDApp.entities.Role;
 import com.example.CRUDApp.entities.UserEntity;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.annotation.PostConstruct;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
@@ -27,33 +29,26 @@ public class JWTGenerator {
 
     private static final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
 
-    public String generateToken(Authentication authentication){
-//        String username = authentication.getName();
+    public String generateToken(Authentication authentication) {
+        UserEntity userEntity = customUserDetailsService.findByUsername(authentication.getName());
 
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String username = userDetails.getUsername();
-        UserEntity userEntity = customUserDetailsService.findByUsername(username);
-        int userId = userEntity.getId(); // Pobieramy ID użytkownika
+        Hibernate.initialize(userEntity.getRoles());
+
         Date currentDate = new Date();
-        Date expireDate = new Date(currentDate.getTime() + SecurityConstants.JWT_EXPIRATION);
-
         String roles = userEntity.getRoles().stream()
-                .map(role -> role.getName())
+                .map(Role::getName)
                 .collect(Collectors.joining(","));
 
-        String token = Jwts.builder()
+        return Jwts.builder()
                 .setHeaderParam("alg", "HS512")
                 .setHeaderParam("typ", "JWT")
-                .setSubject(username)
+                .setSubject(userEntity.getUsername())
                 .claim("roles", roles)
-                .claim("name", userDetails.getUsername())
+                .claim("name", userEntity.getUsername())
                 .setIssuedAt(currentDate)
-                .setExpiration(expireDate)
+                .setExpiration(new Date(currentDate.getTime() + SecurityConstants.JWT_EXPIRATION))
                 .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
-        System.out.println("New token :");
-        System.out.println(token);
-        return token;
     }
     public String getUsernameFromJWT(String token){
         Claims claims = Jwts.parserBuilder()
