@@ -1,5 +1,6 @@
 package com.example.CRUDApp.services;
 
+import com.example.CRUDApp.dto.CourseDto;
 import com.example.CRUDApp.entities.Course;
 import com.example.CRUDApp.entities.UserEntity;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +12,7 @@ public interface CourseService {
 
     String upsert(Course course, Integer id);
 
-    public ResponseEntity<String> addCourse(Course course);
+    public ResponseEntity<String> addCourse(CourseDto courseDto);
 
     public Course getById(Integer id);
 

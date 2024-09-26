@@ -1,9 +1,8 @@
 package com.example.CRUDApp.services;
 
-import com.example.CRUDApp.entities.UserEntity;
+import com.example.CRUDApp.dto.CourseDto;
 import com.example.CRUDApp.repositories.CourseRepository;
 import com.example.CRUDApp.entities.Course;
-import com.example.CRUDApp.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,12 +30,16 @@ public class CoursServiceImpl implements CourseService {
     }
 
     @Override
-    public ResponseEntity<String> addCourse(Course course) {
-        Optional<Course> findById = courseRepo.findById(course.getId());
-        if (findById.isPresent()) {
+    public ResponseEntity<String> addCourse(CourseDto courseDto) {
+        Optional<Course> findByName = courseRepo.findByName(courseDto.getName());
+        if (findByName.isPresent()) {
             return new ResponseEntity<>("Course already exists", HttpStatus.CONFLICT);
         } else {
-            courseRepo.save(course);
+
+            Course course = new Course();
+            course.setName(courseDto.getName());
+
+            courseRepo.save(course); // Zapisz kurs, ID generuje się automatycznie
             return new ResponseEntity<>("Course created successfully", HttpStatus.CREATED);
         }
     }
@@ -44,11 +47,6 @@ public class CoursServiceImpl implements CourseService {
     public void save(Course updatedCourse) {
         courseRepo.save(updatedCourse);
     }
-
-//    @Override
-//    public UserEntity findByUsername(String username) {
-//        return null;
-//    }
 
 
     @Override
@@ -75,7 +73,7 @@ public class CoursServiceImpl implements CourseService {
         if (existingCourseOptional.isPresent()) {
             Course existingCourse = existingCourseOptional.get();
             existingCourse.setName(course.getName());
-            existingCourse.setPrice(course.getPrice());
+//            existingCourse.setPrice(course.getPrice());
             courseRepo.save(existingCourse);
             return ResponseEntity.ok("Kurs o ID " + id + " został zaktualizowany pomyślnie.");
         } else {

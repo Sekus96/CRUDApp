@@ -6,8 +6,11 @@ import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CourseRepository extends JpaRepository<Course, Serializable> {
     List<Course> findById(Course byId);
+
+    Optional<Course> findByName(String name);
 }
