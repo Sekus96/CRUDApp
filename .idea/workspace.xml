@@ -4,27 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5313ed7e-74ce-4902-bea2-bc321fefccda" name="Changes" comment="Chaning FetchType from EAGER to LAZY">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/controllers/FlashcardController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/dto/CourseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/dto/FlashcardDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/entities/Flashcard.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/repositories/FlashcardRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/services/FlashcardService.java" afterDir="false" />
+    <list default="true" id="5313ed7e-74ce-4902-bea2-bc321fefccda" name="Changes" comment="Added Flashcard controller with GET &amp; POST methods">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/exceptions/GlobalExceptionHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/controllers/AuthController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/controllers/CourseRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/controllers/CourseRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/controllers/FlashcardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/controllers/FlashcardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/dto/CourseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/dto/CourseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/dto/FlashcardDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/dto/FlashcardDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/dto/LoginDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/dto/LoginDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/dto/RegisterDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/dto/RegisterDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/entities/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/entities/Course.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/entities/Flashcard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/entities/Flashcard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/entities/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/entities/UserEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/repositories/CourseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/repositories/CourseRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/security/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/services/CoursServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/services/CoursServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/services/CourseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/services/CourseService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/services/FlashcardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/services/FlashcardService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/CRUDApp/controllers/AuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CRUDApp/controllers/AuthController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/CRUDApp/controllers/CourseRestController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CRUDApp/controllers/CourseRestController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CRUDApp/dto/LoginDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CRUDApp/dto/LoginDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CRUDApp/dto/RegisterDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CRUDApp/dto/RegisterDto.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/CRUDApp/entities/Course.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CRUDApp/entities/Course.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/CRUDApp/entities/UserEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CRUDApp/entities/UserEntity.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/CRUDApp/repositories/CourseRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CRUDApp/repositories/CourseRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CRUDApp/security/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CRUDApp/security/SecurityConfig.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/CRUDApp/services/CoursServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CRUDApp/services/CoursServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/CRUDApp/services/CourseService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CRUDApp/services/CourseService.class" afterDir="false" />
     </list>
@@ -71,7 +77,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;last_directory_selection&quot;: &quot;C:/Users/radse/Downloads/CRUDApp/src/main/java/com/example/CRUDApp&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/radse/Downloads/Test&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Users/radse/IdeaProjects/StockProject&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
@@ -168,7 +174,14 @@
       <option name="project" value="LOCAL" />
       <updated>1725464006304</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added Flashcard controller with GET &amp; POST methods">
+      <created>1727350886349</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1727350886349</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -188,7 +201,8 @@
     <MESSAGE value="Second modification" />
     <MESSAGE value="Transferring logic to the service" />
     <MESSAGE value="Chaning FetchType from EAGER to LAZY" />
-    <option name="LAST_COMMIT_MESSAGE" value="Chaning FetchType from EAGER to LAZY" />
+    <MESSAGE value="Added Flashcard controller with GET &amp; POST methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Flashcard controller with GET &amp; POST methods" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/CRUDApp$CrudAppApplication.ic" NAME="CrudAppApplication Coverage Results" MODIFIED="1715250245166" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

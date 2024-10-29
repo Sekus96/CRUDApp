@@ -1,6 +1,5 @@
 package com.example.CRUDApp.controllers;
 
-import com.example.CRUDApp.dto.CourseDto;
 import com.example.CRUDApp.dto.FlashcardDto;
 import com.example.CRUDApp.entities.Flashcard;
 import com.example.CRUDApp.repositories.FlashcardRepository;
@@ -9,7 +8,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +26,7 @@ public class FlashcardController {
 
     @Operation(summary = "Get all flashcards", security = @SecurityRequirement(name = "bearerAuth"))
     @GetMapping("/getCard")
-    public ResponseEntity<List<Flashcard>> getAllFlashcards(){
+    public ResponseEntity<List<FlashcardDto>> getAllFlashcards(){
         return ResponseEntity.ok(flashcardService.getAllFlashcards());
     }
 

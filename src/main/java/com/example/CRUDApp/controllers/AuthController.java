@@ -13,6 +13,7 @@ import com.example.CRUDApp.services.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
@@ -58,13 +59,13 @@ public class AuthController {
 
     @Operation(summary = "Login user", security = @SecurityRequirement(name = "bearerAuth"))
     @PostMapping("login")
-    public ResponseEntity<AuthResponseDto> login(@RequestBody LoginDto loginDto) {
+    public ResponseEntity<AuthResponseDto> login(@Valid @RequestBody LoginDto loginDto) {
         return userService.login(loginDto);
     }
 
     @Operation(summary = "Register a new user", security = @SecurityRequirement(name = "bearerAuth"))
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody RegisterDto registerDto) {
+    public ResponseEntity<String> register(@Valid @RequestBody RegisterDto registerDto) {
         return userService.register(registerDto);
     }
 

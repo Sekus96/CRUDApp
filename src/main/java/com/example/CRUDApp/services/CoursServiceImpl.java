@@ -1,6 +1,8 @@
 package com.example.CRUDApp.services;
 
 import com.example.CRUDApp.dto.CourseDto;
+import com.example.CRUDApp.dto.FlashcardDto;
+import com.example.CRUDApp.entities.Flashcard;
 import com.example.CRUDApp.repositories.CourseRepository;
 import com.example.CRUDApp.entities.Course;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,8 +60,37 @@ public class CoursServiceImpl implements CourseService {
     }
 
     @Override
-    public List<Course> getAllCourses() {
-        return courseRepo.findAll();
+    public List<CourseDto> getAllCourses() {
+        List<Course> courses = courseRepo.findAll();
+
+        List<CourseDto> courseDtos = new ArrayList<>();
+
+        for (Course course : courses) {
+            CourseDto courseDto = new CourseDto();
+            courseDto.setId(course.getId());
+            courseDto.setName(course.getName());
+
+            // Mapowanie fiszek do DTO
+            List<FlashcardDto> flashcardDtos = new ArrayList<>();
+            for (Flashcard flashcard : course.getFlashcards()) {
+                FlashcardDto flashcardDto = new FlashcardDto();
+                flashcardDto.setId(flashcard.getId());
+                flashcardDto.setName(flashcard.getName());
+                flashcardDto.setNameInEnglish(flashcard.getNameInEnglish());
+                flashcardDto.setImage(flashcard.getImage());
+
+                flashcardDtos.add(flashcardDto);
+            }
+
+            courseDto.setFlashcard(flashcardDtos);
+            courseDtos.add(courseDto);
+        }
+
+        if (courseDtos.isEmpty()) {
+            return new ArrayList<>();
+        } else {
+            return courseDtos;
+        }
     }
 
     @Override
@@ -106,6 +138,14 @@ public class CoursServiceImpl implements CourseService {
     @Override
     public boolean existsById(Integer id) {
         return courseRepo.existsById(id);
+    }
+
+    @Override
+    public List<Course> findById(List<Integer> courseIds) {
+        if (courseIds == null || courseIds.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return courseRepo.findAllById(courseIds);
     }
 
     @Override

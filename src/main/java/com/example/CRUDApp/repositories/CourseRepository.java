@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface CourseRepository extends JpaRepository<Course, Serializable> {
-    List<Course> findById(Course byId);
-
+public interface CourseRepository extends JpaRepository<Course, Integer> {
     Optional<Course> findByName(String name);
 }

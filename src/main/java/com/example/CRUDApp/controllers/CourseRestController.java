@@ -34,13 +34,13 @@ public class CourseRestController {
     private CourseService courseService;
 
     @Operation(summary = "Get all courses", security = @SecurityRequirement(name = "bearerAuth"))
-    @GetMapping("/secure")
-    public ResponseEntity<List<Course>> getAllCourses(){
+    @GetMapping("/get")
+    public ResponseEntity<List<CourseDto>> getAllCourses(){
         return ResponseEntity.ok(courseService.getAllCourses());
     }
 
     @Operation(summary = "Get course by ID", security = @SecurityRequirement(name = "bearerAuth"))
-    @GetMapping("/secure/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<Course> getCourse(@PathVariable Integer id) {
         return courseService.getCourseById(id);
     }

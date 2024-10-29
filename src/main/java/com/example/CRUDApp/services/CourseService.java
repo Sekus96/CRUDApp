@@ -18,7 +18,7 @@ public interface CourseService {
 
     public Course findById(Integer id);
 
-    public List<Course> getAllCourses();
+    public List<CourseDto> getAllCourses();
 
 //    public boolean deleteById(Integer id);
 
@@ -31,4 +31,6 @@ public interface CourseService {
     boolean existsById(Integer id);
 
     ResponseEntity<Course> getCourseById(Integer id);
+
+    List<Course> findById(List<Integer> courseIds);
 }
