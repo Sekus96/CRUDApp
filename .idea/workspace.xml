@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5313ed7e-74ce-4902-bea2-bc321fefccda" name="Changes" comment="Added ManyToMany relation between Course &amp; Flashcard + Login &amp; Password validation + GlobalExceptionHandler">
+    <list default="true" id="5313ed7e-74ce-4902-bea2-bc321fefccda" name="Changes" comment="Little update on validations messages &amp; GlobalExceptionHandler">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/dto/RegisterDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/dto/RegisterDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/exceptions/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CRUDApp/exceptions/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CRUDApp/dto/RegisterDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CRUDApp/dto/RegisterDto.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +162,14 @@
       <option name="project" value="LOCAL" />
       <updated>1730219276196</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Little update on validations messages &amp; GlobalExceptionHandler">
+      <created>1730289844319</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1730289844319</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -186,7 +191,8 @@
     <MESSAGE value="Chaning FetchType from EAGER to LAZY" />
     <MESSAGE value="Added Flashcard controller with GET &amp; POST methods" />
     <MESSAGE value="Added ManyToMany relation between Course &amp; Flashcard + Login &amp; Password validation + GlobalExceptionHandler" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added ManyToMany relation between Course &amp; Flashcard + Login &amp; Password validation + GlobalExceptionHandler" />
+    <MESSAGE value="Little update on validations messages &amp; GlobalExceptionHandler" />
+    <option name="LAST_COMMIT_MESSAGE" value="Little update on validations messages &amp; GlobalExceptionHandler" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/CRUDApp$CrudAppApplication.ic" NAME="CrudAppApplication Coverage Results" MODIFIED="1715250245166" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
